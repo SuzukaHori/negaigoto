@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="sock">
+    <h2><%= @wish.context %></h3>
+    <h3 class="writer"><%= @wish.writer %></h2>
+  </div>
+</div>
+
+<%= button_to '削除', wish_path(@wish.id), method: :delete %>
