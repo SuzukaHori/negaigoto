@@ -2,7 +2,7 @@ class WishesController < ApplicationController
   def new
     @wish = Wish.new
   end
-  
+
   def index
     @wishes = Wish.all
   end
@@ -12,15 +12,22 @@ class WishesController < ApplicationController
   end
 
   def create
-    wish = Wish.new(wish_params)
-    wish.save
-    redirect_to wishes_path
+    @wish = Wish.new(wish_params)
+    if @wish.save
+      redirect_to wishes_path
+    else
+      render 'new'
+    end
   end
 
   def destroy
-    wish = Wish.find(params[:id])
-    wish.destroy
-    redirect_to wishes_path
+    @wish = Wish.find(params[:id])
+    if @wish.destroy
+      flash[:notice] = '削除に成功しました'
+      redirect_to wishes_path
+    else
+      flash[:notice]  = '削除に失敗しました'
+    end
   end
 
   def edit
@@ -35,9 +42,9 @@ class WishesController < ApplicationController
       render 'edit'
     end
   end
-    
 
   private
+
   def wish_params
     params.require(:wish).permit(:context, :writer)
   end
