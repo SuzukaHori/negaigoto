@@ -1,15 +1,16 @@
-<h1>新しい願いごと</h1>
+<div class="container mt-5">
+  <h1 class="mb-4">新しい願いごと</h1>
 
-<% if @wish.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@wish.errors.count, "error") %> prohibited this wish from being saved:</h2>
+  <% if @wish.errors.any? %>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading"><%= pluralize(@wish.errors.count, "error") %>つのエラーのため保存できませんでした。</h4>
+      <ul>
+        <% @wish.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-    <ul>
-    <% @wish.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<%= render 'form', wish: @wish %>
+  <%= render 'form', wish: @wish %>
+</div>

@@ -1,12 +1,18 @@
-<div class="container">
-  <% @wishes.each do |wish| %>
-    <%= link_to wish_path(wish.id), class: "sock" do %>
-      <div>
-        <h2><%= wish.context %></h3>
-        <h3 class="writer"><%= wish.writer %></h2>
+<div class="container mt-5">
+  <div class="row">
+    <% @wishes.each do |wish| %>
+      <div class="col-md-4 mb-4">
+        <%= link_to wish_path(wish.id), class: "card text-decoration-none text-dark" do %>
+          <div class="card-body">
+            <h5 class="card-title"><%= wish.context %></h5>
+            <p class="card-text"><small class="text-muted">by: <%= wish.writer %></small></p>
+          </div>
+        <% end %>
       </div>
     <% end %>
-  <% end %>
+  </div>
 </div>
 
-<%= link_to "新規作成", new_wish_path %>
+<div class="container mt-4">
+  <%= link_to "新規作成", new_wish_path, class: "btn btn-primary" %>
+</div>
